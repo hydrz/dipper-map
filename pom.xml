@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.hydrz</groupId>
@@ -16,12 +17,30 @@
         <lombok.version>1.18.10</lombok.version>
     </properties>
 
+    <developers>
+        <developer>
+            <name>hydrz</name>
+            <email>n.haoyuan@gmail.com</email>
+        </developer>
+    </developers>
+
     <scm>
         <url>https://github.com/hydrz/dipper-map</url>
         <connection>scm:git:git@github.com:hydrz/dipper-map.git</connection>
         <developerConnection>scm:git:git@github.com:hydrz/dipper-map.git</developerConnection>
-      <tag>HEAD</tag>
-  </scm>
+    </scm>
+
+    <issueManagement>
+        <system>Github Issue</system>
+        <url>https://github.com/hydrz/dipper-map/issues</url>
+    </issueManagement>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://raw.githubusercontent.com/hydrz/dipper-map/master/LICENSE</url>
+        </license>
+    </licenses>
 
     <dependencies>
         <!-- 全局单元测试 -->
