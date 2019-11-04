@@ -38,7 +38,7 @@ public class DistrictFunctionsTest {
         ArrayList<District> districts = new ArrayList<>();
         apply(list, 0, districts);
 
-        CsvWriter writer = CsvUtil.getWriter(DistrictFunctions.RESOURCE_PATH, CharsetUtil.CHARSET_UTF_8);
+        CsvWriter writer = CsvUtil.getWriter("/tmp/" + DistrictFunctions.FILE_NAME, CharsetUtil.CHARSET_UTF_8);
         writer.flush();
 
         Field[] declaredFields = (new District()).getClass().getDeclaredFields();
@@ -64,8 +64,7 @@ public class DistrictFunctionsTest {
     }
 
     @Test
-    public void getDistrictByPoint() throws ParseException {
-        DistrictFunctions.init();
+    public void getDistrictByPoint() throws ParseException, IOException {
         Point point = (Point) wkt.read("POINT(119.319972 26.060499)");
         District districtByPoint = DistrictFunctions.getDistrictByPoint(point, DistrictLevel.DISTRICT);
         System.out.println(districtByPoint);
