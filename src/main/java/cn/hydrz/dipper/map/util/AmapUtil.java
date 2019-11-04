@@ -57,7 +57,7 @@ public class AmapUtil {
      * 高德格式转wkt格式
      *
      * @param polylineStr 高德返回的polyline
-     * @return
+     * @return StringBuilder
      */
     public static StringBuilder transformerPolylineToWKT(String polylineStr) {
         StringBuilder stringBuilder = new StringBuilder(polylineStr);
