@@ -24,7 +24,7 @@ public class AmapUtil {
      * @return String
      */
     public static String getWebKey() {
-        return "ab0a91dc4f4161172b7e841dd37eddff";
+        return System.getenv("AMAP_WEBKEY");
     }
 
 
