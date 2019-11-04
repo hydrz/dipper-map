@@ -4,7 +4,7 @@
 
     <groupId>cn.hydrz</groupId>
     <artifactId>dipper-map</artifactId>
-    <version>1.0.2</version>
+    <version>1.0.3-SNAPSHOT</version>
     <name>${project.artifactId}</name>
     <description>map libraries for Java</description>
 
@@ -27,7 +27,7 @@
         <url>https://github.com/hydrz/dipper-map</url>
         <connection>scm:git:git@github.com:hydrz/dipper-map.git</connection>
         <developerConnection>scm:git:git@github.com:hydrz/dipper-map.git</developerConnection>
-      <tag>1.0.2</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <issueManagement>
