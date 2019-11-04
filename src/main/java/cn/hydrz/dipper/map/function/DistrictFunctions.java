@@ -1,7 +1,7 @@
 package cn.hydrz.dipper.map.function;
 
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.lang.Assert;
+import cn.hutool.core.io.resource.ResourceUtil;
 import cn.hutool.core.text.csv.*;
 import cn.hutool.core.util.NumberUtil;
 import cn.hydrz.dipper.map.constant.AmapConst;
@@ -13,26 +13,24 @@ import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.io.ParseException;
 import org.locationtech.jts.io.WKTReader;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import java.util.zip.ZipInputStream;
 
 /**
  * @author hydrz
  */
 public class DistrictFunctions {
+    public static final String ZIP_RESOURCE = "db/district.zip";
     public static final String FILE_NAME = "district.csv";
-    public static final URL ZIP_RESOURCE = DistrictFunctions.class.getClassLoader().getResource("db/district.zip");
     private static final Logger log = Logger.getLogger(DistrictFunctions.class.getName());
     private static final WKTReader wkt = new WKTReader(new GeometryFactory());
     private static List<District> districts = new ArrayList();
@@ -45,19 +43,23 @@ public class DistrictFunctions {
             return;
         }
 
-        Assert.notNull(ZIP_RESOURCE);
-
         try {
-            ZipFile zipFile = new ZipFile(new File(ZIP_RESOURCE.getFile()));
-            ZipEntry entry = zipFile.getEntry(FILE_NAME);
-            InputStream inputStream = zipFile.getInputStream(entry);
+            InputStream stream = ResourceUtil.getStream(ZIP_RESOURCE);
+            ZipInputStream inputStream = new ZipInputStream(stream);
+
+            ZipEntry nextEntry = null;
+
+            while ((nextEntry = inputStream.getNextEntry()) != null) {
+                if (nextEntry.getName().equals(FILE_NAME)) {
+                    break;
+                }
+            }
 
             CsvReadConfig csvReadConfig = CsvReadConfig.defaultConfig();
             csvReadConfig.setContainsHeader(true);
             CsvReader reader = CsvUtil.getReader(csvReadConfig);
             CsvData data = reader.read(new InputStreamReader(inputStream));
             inputStream.close();
-            zipFile.close();
 
             for (int i = 1; i < data.getRowCount(); i++) {
                 CsvRow row = data.getRow(i);
